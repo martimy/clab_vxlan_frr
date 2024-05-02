@@ -9,7 +9,7 @@ This lab demonstrates the use of VxLAN to create an Ethernet tunnel connecting t
 Use the following command to start the lab:
 
 ```
-$ sudo clab deploy -t vxlan-frr-simple.clab.yml
+$ sudo clab deploy -t vxlan-simple.clab.yaml
 ```
 
 Setup VxLAN:
@@ -21,7 +21,7 @@ $ sudo ./setup-vxlan.sh
 To end the lab:
 
 ```
-sudo clab destroy --t vxlan-frr-simple.clab.yml
+sudo clab destroy --t vxlan-simple.clab.yaml
 ```
 
 
@@ -30,13 +30,13 @@ sudo clab destroy --t vxlan-frr-simple.clab.yml
 In one terminal, ping from one host to the other:
 
 ```
-$ docker exec -it clab-vxlan_frr_simple-host4 ping 192.168.1.5
+$ docker exec -it clab-simple-host4 ping 192.168.1.5
 ```
 
 In another terminal, use tshark to look at the traffic at R3:
 
 ```
-$ sudo ip netns exec clab-vxlan_frr_simple-r3 tshark -i eth2 -O vxlan
+$ sudo ip netns exec clab-simple-r3 tshark -i eth2 -O vxlan
 ```
 
 You should see output similar to the following. Note the encapsulation of Ethernet frame inside a UDP packet coming from R1.
@@ -64,7 +64,7 @@ Internet Control Message Protocol
 Or at router R1:
 
 ```
-$ sudo ip netns exec clab-vxlan_frr_simple-r1 tshark -i eth1 -O vxlan
+$ sudo ip netns exec clab-simple-r1 tshark -i eth1 -O vxlan
 ```
 
 with an output similar to the following:
@@ -92,7 +92,7 @@ Internet Control Message Protocol
 To verify EVPN configuration on the router R1:
 
 ```
-$ docker exec -it clab-vxlan_frr_simple-r1 vtysh -c "show bgp l2vpn evpn"
+$ docker exec -it clab-simple-r1 vtysh -c "show bgp l2vpn evpn"
 ```
 
 ```

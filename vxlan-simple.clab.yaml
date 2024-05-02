@@ -1,4 +1,4 @@
-name: vxlan_frr_simple
+name: simple
 
 topology:
   defaults:
@@ -11,17 +11,17 @@ topology:
     r1:
       image: frrouting/frr
       binds:
-        - config/r1/daemons:/etc/frr/daemons
+        - config/daemons:/etc/frr/daemons
         - config/r1/frr.conf:/etc/frr/frr.conf
     r2:
       image: frrouting/frr
       binds:
-        - config/r2/daemons:/etc/frr/daemons
+        - config/daemons:/etc/frr/daemons
         - config/r2/frr.conf:/etc/frr/frr.conf
     r3:
       image: frrouting/frr
       binds:
-        - config/r3/daemons:/etc/frr/daemons
+        - config/daemons:/etc/frr/daemons
         - config/r3/frr.conf:/etc/frr/frr.conf
     host4:
       exec:

@@ -31,6 +31,6 @@ topology:
         - ip addr add 192.168.1.5/24 dev eth1
   links:
     - endpoints: ["r1:eth1", "r2:eth2"]
-    - endpoints: ["r2:eth1", "r3:eth2"]
+    - endpoints: ["r3:eth1", "r2:eth1"]
     - endpoints: ["host4:eth1", "r1:eth2"]
-    - endpoints: ["host5:eth1", "r3:eth1"]
+    - endpoints: ["host5:eth1", "r3:eth2"]

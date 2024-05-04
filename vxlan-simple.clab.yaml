@@ -12,17 +12,17 @@ topology:
       image: frrouting/frr
       binds:
         - config/daemons:/etc/frr/daemons
-        - config/r1/frr.conf:/etc/frr/frr.conf
+        - config/r1-frr.conf:/etc/frr/frr.conf
     r2:
       image: frrouting/frr
       binds:
         - config/daemons:/etc/frr/daemons
-        - config/r2/frr.conf:/etc/frr/frr.conf
+        - config/r2-frr.conf:/etc/frr/frr.conf
     r3:
       image: frrouting/frr
       binds:
         - config/daemons:/etc/frr/daemons
-        - config/r3/frr.conf:/etc/frr/frr.conf
+        - config/r3-frr.conf:/etc/frr/frr.conf
     host4:
       exec:
         - ip addr add 192.168.1.4/24 dev eth1

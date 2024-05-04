@@ -2,7 +2,7 @@
 
 This lab demonstrates the use of VxLAN to create an Ethernet tunnel connecting two LAN segments across a layer 3 network.
 
-The network consists of two routers, serving as VxLAN VTEP. Rach router is connected to a single host. The routers rely on static routing for connectivity.  
+The network consists of two routers, serving as VxLAN VTEP. Each router is connected to a single host. The routers rely on static routing for connectivity.  
 
 ## Starting and ending the lab
 
@@ -22,7 +22,7 @@ $ sudo ./setup-vxlan.sh
 To end the lab:
 
 ```
-$ sudo clab destroy [-t vxlan-simple.clab.yaml]
+$ sudo clab destroy [-t vxlan-ptp.clab.yaml]
 ```
 
 
@@ -34,7 +34,7 @@ You should be able to ping from one host to the other:
 $ docker exec -it clab-ptp-host4 ping 192.168.1.5
 ```
 
-To check the MAC table:
+To check the bridge forwarding database:
 
 ```
 $ docker exec clab-ptp-r1 bridge fdb show dev vxlan100 | grep dst

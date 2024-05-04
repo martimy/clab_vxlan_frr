@@ -2,7 +2,9 @@
 
 This lab demonstrates the use of VxLAN to create an Ethernet tunnel connecting two LAN segments across a layer 3 network.
 
-The network consists of two routers, serving as VxLAN VTEP. Each router is connected to a single host. The routers rely on static routing for connectivity.  
+The network consists of two routers, serving as VxLAN VTEP. Each router is connected to a single host. The routers rely on static routing for connectivity.
+
+![p2p](../img/ptp.png)
 
 ## Starting and ending the lab
 

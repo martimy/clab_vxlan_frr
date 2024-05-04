@@ -4,6 +4,8 @@ This lab demonstrates the use of VxLAN to create an Ethernet tunnel connecting t
 
 The network consists of three routers, serving as VxLAN VTEP. The routers are connected to each other in a ring topology. Each router is connected to a single host. The routers rely on OSPF routing for connectivity.  
 
+![p2p](../img/ring.png)
+
 VTEP discovery is done using two strategies:
 
 - Unicast with static flooding: All the remote VTEPs are associated with the all-zero address. A BUM frame will be replicated to all these destinations. The VXLAN device will still learn remote addresses automatically using source-address learning.

@@ -1,4 +1,4 @@
-name: simple
+name: evpn
 
 topology:
   defaults:

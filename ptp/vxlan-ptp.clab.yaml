@@ -9,12 +9,12 @@ topology:
     #image: wbitt/network-multitool:alpine-extra
   nodes:
     r1:
-      image: frrouting/frr
+      image: quay.io/frrouting/frr:9.1.0
       binds:
         - config/daemons:/etc/frr/daemons
         - config/r1-frr.conf:/etc/frr/frr.conf
     r2:
-      image: frrouting/frr
+      image: quay.io/frrouting/frr:9.1.0
       binds:
         - config/daemons:/etc/frr/daemons
         - config/r2-frr.conf:/etc/frr/frr.conf

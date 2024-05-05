@@ -32,3 +32,9 @@ These are the following learning [strategies](https://vincent.bernat.ch/en/blog/
 The following diagram describes the structure of VTEP in Linux:
 
 ![VTEP](img/vtep.png)
+
+
+## Notes
+
+- This lab uses Dokcer image: quay.io/frrouting/frr:9.1.0
+  - FRR version: 9.1.0 running on Alpine Linux with Linux kernel 5.4.0-91-generic x86_64

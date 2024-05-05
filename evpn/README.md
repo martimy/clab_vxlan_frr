@@ -1,6 +1,6 @@
-# VxLAN Lab
+# VxLAN over BGP EVPN
 
-This lab demonstrates the use of VxLAN to create an Ethernet tunnel connecting two LAN segments across a layer 3 network using BGP EVPN technology.
+This lab demonstrates the use of VxLAN to create an Ethernet tunnel connecting two LAN segments across a layer 3 network using BGP EVPN technology. The networ consists of three routers, two of the routers are VTEPs connecting to one server. The third router acts as a reout reflector for BGP routes.
 
 ![EVPN](../img/evpn.png)
 

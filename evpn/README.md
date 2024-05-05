@@ -9,7 +9,7 @@ This lab demonstrates the use of VxLAN to create an Ethernet tunnel connecting t
 Use the following command to start the lab:
 
 ```
-$ sudo clab deploy -t vxlan-evpn.clab.yaml
+$ sudo clab deploy [-t vxlan-evpn.clab.yaml]
 ```
 
 Setup VxLAN:
@@ -21,7 +21,7 @@ $ sudo ./setup-vxlan.sh
 To end the lab:
 
 ```
-sudo clab destroy --t vxlan-evpn.clab.yaml
+sudo clab destroy [-t vxlan-evpn.clab.yaml]
 ```
 
 

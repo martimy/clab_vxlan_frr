@@ -2,11 +2,29 @@
 
 This repository includes multiple lab setups that illustrate multiple ways to deploy VxLANs:
 
-- Point-to-Point VxLAN Tunnel
-- Flooding over Underlay Network
+- Point-to-Point Tunnel
+- Flooding
+- Multicast
 - BGP-EVPN
 
-## VxLAN
+## Usage
+
+Clone this repository:
+
+```
+$ git clone https://github.com/martimy/clab_vxlan_frr [vxlan]
+```
+
+Change to the directory of the lab you choose. For example
+
+```
+$ cd clab_vxlan_frr
+$ cd ptp
+```
+
+For more information, read the lab the documentation.
+
+## Introduction to VxLAN
 
 Virtual eXtensible Local-Area Network (VxLAN) is a standard network virtualization technology defined by the Internet Engineering Task Force (IETF) in [RFC 7348](https://datatracker.ietf.org/doc/html/rfc7348). It carries Ethernet traffic over an existing IP network from, potentially, a large number of tenants while maintaining traffic separation.
 

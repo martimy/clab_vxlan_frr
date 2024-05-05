@@ -1,15 +1,15 @@
-# VxLAN over L3 Network
+# VxLAN using Multicast
 
-This lab demonstrates the use of VxLAN to create an Ethernet tunnel connecting three LAN segments across a layer 3 network.
+This lab demonstrates the use of VxLAN to link three across a layer 3 network.
 
-The network consists of three routers, serving as VxLAN VTEP. The routers are connected to each other in a ring topology. Each router is connected to a single host. The routers rely on OSPF routing for connectivity.  
+The network consists of three routers, serving as VxLAN VTEP. Each router is connected to a single host. The routers are connected to a fourth router forming star topology. The routers rely on OSPF for routing. PIM and IGMP are used for VTEP discovery.  
 
 ![p2p](../img/pim.png)
 
-VTEP discovery is done using multicast:
 
-PIM must be enabled on all interfaces facing multicast sources or multicast receivers, as well as on the interface where the RP address is configured.
-
+Configuration Notes:
+- PIM must be enabled on all interfaces facing multicast sources or multicast receivers, as well as on the interface where the RP address is configured.
+- TTL must be increased from 1 to allow from packet to traverse the network.
 
 ## Starting and ending the lab
 
@@ -17,27 +17,19 @@ Use the following command to start the lab:
 
 ```
 $ cd ptp
-$ sudo clab deploy [-t vxlan-ring.clab.yaml]
+$ sudo clab deploy [-t vxlan-pim.clab.yaml]
 ```
 
 Setup VxLAN:
 
-- For Unicast with static flooding:
-
-  ```
-  $ sudo ./setup-vxlan.sh
-  ```
-
-- For Unicast with static MAC entries:
-
-  ```
-  $ sudo ./setup-vxlan-static.sh
-  ```
+```
+$ sudo ./setup-vxlan.sh
+```
 
 To end the lab:
 
 ```
-$ sudo clab destroy [-t vxlan-ring.clab.yaml]
+$ sudo clab destroy [-t vxlan-pim.clab.yaml]
 ```
 
 ## Verification
@@ -55,10 +47,9 @@ $ docker exec clab-ptp-r1 bridge fdb show dev vxlan100 | grep dst
 ```
 
 ```
-00:00:00:00:00:00 dst 1.1.1.2 self permanent
-00:00:00:00:00:00 dst 1.1.1.3 self permanent
-aa:c1:ab:d4:91:6e dst 1.1.1.3 self
+00:00:00:00:00:00 dst 239.1.1.1 via eth1 self permanent
+aa:bb:04:04:04:04 dst 1.1.1.1 self
+96:3b:b5:09:3d:ec dst 1.1.1.1 self
 aa:bb:06:06:06:06 dst 1.1.1.3 self
-fa:84:3d:1c:89:dc dst 1.1.1.3 self
-aa:bb:05:05:05:05 dst 1.1.1.2 self
+26:28:44:5c:e0:dc dst 1.1.1.3 self
 ```

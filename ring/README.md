@@ -6,9 +6,11 @@ The lab builds a network of three routers, serving as VxLAN VTEPs. The routers f
 
 VTEP discovery is done using two strategies:
 
-- Unicast with static flooding: All the remote VTEPs are associated with the all-zero address. A BUM frame will be replicated to all these destinations. The VXLAN device will still learn remote addresses automatically using source-address learning.
+- BUM flooding with address learning: All remote VTEPs are associated with the all-zero address. A BUM frame will be replicated to all these destinations. The VXLAN device will still learn remote addresses automatically using source-address learning.
 
-- Unicast with static MAC entries: If the MAC addresses of VTEPs are known, it is possible to pre-populate the FDB and disable learning. The all-zero entries are still needed for broadcast and multicast traffic (e.g. ARP and IPv6 neighbor discovery). Also, if a MAC is missing, the frame will always be sent using the all-zero entries.
+- Static MAC entries: If the MAC addresses of VTEPs are known, it is possible to pre-populate the FDB and disable learning. The all-zero entries are still needed for broadcast and multicast traffic (e.g. ARP and IPv6 neighbor discovery). Also, if a MAC is missing, the frame will always be sent using the all-zero entries.
+
+- Static IP entries: The local VTEP (Linux) can answer ARP requests on behalf of the remote nodes.
 
 
 ## Starting and ending the lab
@@ -22,16 +24,22 @@ $ sudo clab deploy [-t vxlan-ring.clab.yaml]
 
 Setup VxLAN:
 
-- For Unicast with static flooding:
+- For BUM flooding strategy:
 
   ```
-  $ sudo ./setup-vxlan.sh
+  $ sudo ./setup-vxlan-flood.sh
   ```
 
-- For Unicast with static MAC entries:
+- For static MAC entries:
 
   ```
-  $ sudo ./setup-vxlan-static.sh
+  $ sudo ./setup-vxlan-l2.sh
+  ```
+
+- For static IP entries:
+
+  ```
+  $ sudo ./setup-vxlan-l3.sh
   ```
 
 To end the lab:

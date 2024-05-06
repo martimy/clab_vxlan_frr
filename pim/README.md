@@ -1,6 +1,6 @@
 # VxLAN using Multicast
 
-This lab demonstrates the use of VxLAN to link three across a layer 3 network.
+This lab demonstrates the use of VxLAN to link three hosts across a layer 3 network.
 
 The network consists of three routers, serving as VxLAN VTEP. Each router is connected to a single host. The routers are connected to a fourth router forming star topology. The routers rely on OSPF for routing. PIM and IGMP are used for VTEP discovery.  
 

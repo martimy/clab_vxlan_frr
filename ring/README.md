@@ -1,8 +1,6 @@
 # VxLAN over L3 Network
 
-This lab demonstrates the use of VxLAN to create an Ethernet tunnel connecting two LAN segments across a layer 3 network.
-
-The network consists of three routers, serving as VxLAN VTEP. The routers are connected to each other in a ring topology. Each router is connected to a single host. The routers rely on OSPF routing for connectivity.  
+The lab builds a network of three routers, serving as VxLAN VTEPs. The routers form a ring topology. Each router is connected to a single host. The routers rely on OSPF routing for connectivity.  
 
 ![p2p](../img/ring.png)
 

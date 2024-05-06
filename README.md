@@ -1,11 +1,12 @@
 # VxLAN Labs
 
-This repository includes multiple lab setups that illustrate multiple ways to deploy VxLANs:
+This repository includes multiple lab setups that illustrate several VxLAN deployment scenarios:
 
-- Point-to-Point Tunnel
-- Flooding
-- Multicast
-- BGP-EVPN
+- VxLAN over point-to-point connection
+- VxLAN over a ring topology using several VTEP discovery methods
+- VxLAN over a start topology with multicast
+- VxLAN over hub-and-spoke using BGP-EVPN
+- VxLAN over a spine-leaf topology using BGP-EVPN
 
 ## Usage
 
@@ -43,8 +44,8 @@ The following diagram describes the structure of VTEP in Linux:
 
 VXLAN does not provide a control plane, and VTEP discovery and host information (IP and MAC addresses, VNIs, and gateway VTEP IP address) learning are implemented using several [strategies](https://vincent.bernat.ch/en/blog/2017-vxlan-linux), including:
 
-- Unicast with static flooding
-- Unicast with static L2/L3 entries
+- BUM flooding and address learning
+- Static L2/L3 entries
 - Multicast
 - EVPN
 

@@ -8,20 +8,20 @@ all:
     linux:
       hosts:
         clab-dc-host1:
-          ansible_host: 172.20.20.9
+          ansible_host: 172.20.20.2
         clab-dc-host2:
-          ansible_host: 172.20.20.3
-        clab-dc-host3:
-          ansible_host: 172.20.20.7
-        clab-dc-host4:
           ansible_host: 172.20.20.6
+        clab-dc-host3:
+          ansible_host: 172.20.20.8
+        clab-dc-host4:
+          ansible_host: 172.20.20.9
         clab-dc-l1:
           ansible_host: 172.20.20.5
         clab-dc-l2:
-          ansible_host: 172.20.20.8
+          ansible_host: 172.20.20.10
         clab-dc-l3:
           ansible_host: 172.20.20.4
         clab-dc-s1:
-          ansible_host: 172.20.20.2
+          ansible_host: 172.20.20.3
         clab-dc-s2:
-          ansible_host: 172.20.20.10
+          ansible_host: 172.20.20.7

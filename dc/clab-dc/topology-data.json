@@ -6,7 +6,7 @@
       "prefix": "clab",
       "mgmt": {
         "network": "clab",
-        "bridge": "br-6e483662690d",
+        "bridge": "br-f1bff1433e1c",
         "ipv4-subnet": "172.20.20.0/24",
         "ipv4-gw": "172.20.20.1",
         "ipv6-subnet": "2001:172:20:20::/64",
@@ -28,13 +28,13 @@
       "image": "wbitt/network-multitool:alpine-minimal",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.9",
+      "mgmt-ipv4-address": "172.20.20.2",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::9",
+      "mgmt-ipv6-address": "2001:172:20:20::2",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-6e483662690d",
+        "clab-mgmt-net-bridge": "br-f1bff1433e1c",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/home/vagrant/myclabs/vxlan_frr/dc/clab-dc/host1",
@@ -47,18 +47,6 @@
         {
           "host-ip": "",
           "host-port": 0,
-          "port": 80,
-          "protocol": "tcp"
-        },
-        {
-          "host-ip": "",
-          "host-port": 0,
-          "port": 11443,
-          "protocol": "tcp"
-        },
-        {
-          "host-ip": "",
-          "host-port": 0,
           "port": 1180,
           "protocol": "tcp"
         },
@@ -66,6 +54,18 @@
           "host-ip": "",
           "host-port": 0,
           "port": 443,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 80,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 11443,
           "protocol": "tcp"
         }
       ]
@@ -81,13 +81,13 @@
       "image": "wbitt/network-multitool:alpine-minimal",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-address": "172.20.20.6",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-address": "2001:172:20:20::6",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-6e483662690d",
+        "clab-mgmt-net-bridge": "br-f1bff1433e1c",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/home/vagrant/myclabs/vxlan_frr/dc/clab-dc/host2",
@@ -100,18 +100,6 @@
         {
           "host-ip": "",
           "host-port": 0,
-          "port": 11443,
-          "protocol": "tcp"
-        },
-        {
-          "host-ip": "",
-          "host-port": 0,
-          "port": 1180,
-          "protocol": "tcp"
-        },
-        {
-          "host-ip": "",
-          "host-port": 0,
           "port": 443,
           "protocol": "tcp"
         },
@@ -119,6 +107,18 @@
           "host-ip": "",
           "host-port": 0,
           "port": 80,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 11443,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 1180,
           "protocol": "tcp"
         }
       ]
@@ -134,13 +134,13 @@
       "image": "wbitt/network-multitool:alpine-minimal",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.7",
+      "mgmt-ipv4-address": "172.20.20.8",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::7",
+      "mgmt-ipv6-address": "2001:172:20:20::8",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-6e483662690d",
+        "clab-mgmt-net-bridge": "br-f1bff1433e1c",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/home/vagrant/myclabs/vxlan_frr/dc/clab-dc/host3",
@@ -150,6 +150,12 @@
         "containerlab": "dc"
       },
       "port-bindings": [
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 11443,
+          "protocol": "tcp"
+        },
         {
           "host-ip": "",
           "host-port": 0,
@@ -167,12 +173,6 @@
           "host-port": 0,
           "port": 80,
           "protocol": "tcp"
-        },
-        {
-          "host-ip": "",
-          "host-port": 0,
-          "port": 11443,
-          "protocol": "tcp"
         }
       ]
     },
@@ -187,13 +187,13 @@
       "image": "wbitt/network-multitool:alpine-minimal",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.6",
+      "mgmt-ipv4-address": "172.20.20.9",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::6",
+      "mgmt-ipv6-address": "2001:172:20:20::9",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-6e483662690d",
+        "clab-mgmt-net-bridge": "br-f1bff1433e1c",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/home/vagrant/myclabs/vxlan_frr/dc/clab-dc/host4",
@@ -246,7 +246,7 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-6e483662690d",
+        "clab-mgmt-net-bridge": "br-f1bff1433e1c",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/home/vagrant/myclabs/vxlan_frr/dc/clab-dc/l1",
@@ -269,13 +269,13 @@
       "image": "quay.io/frrouting/frr:9.1.0",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.8",
+      "mgmt-ipv4-address": "172.20.20.10",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::8",
+      "mgmt-ipv6-address": "2001:172:20:20::a",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-6e483662690d",
+        "clab-mgmt-net-bridge": "br-f1bff1433e1c",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/home/vagrant/myclabs/vxlan_frr/dc/clab-dc/l2",
@@ -304,7 +304,7 @@
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-6e483662690d",
+        "clab-mgmt-net-bridge": "br-f1bff1433e1c",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/home/vagrant/myclabs/vxlan_frr/dc/clab-dc/l3",
@@ -327,13 +327,13 @@
       "image": "quay.io/frrouting/frr:9.1.0",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-address": "172.20.20.3",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::2",
+      "mgmt-ipv6-address": "2001:172:20:20::3",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-6e483662690d",
+        "clab-mgmt-net-bridge": "br-f1bff1433e1c",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/home/vagrant/myclabs/vxlan_frr/dc/clab-dc/s1",
@@ -356,13 +356,13 @@
       "image": "quay.io/frrouting/frr:9.1.0",
       "mgmt-net": "",
       "mgmt-intf": "",
-      "mgmt-ipv4-address": "172.20.20.10",
+      "mgmt-ipv4-address": "172.20.20.7",
       "mgmt-ipv4-prefix-length": 24,
-      "mgmt-ipv6-address": "2001:172:20:20::a",
+      "mgmt-ipv6-address": "2001:172:20:20::7",
       "mgmt-ipv6-prefix-length": 64,
       "mac-address": "",
       "labels": {
-        "clab-mgmt-net-bridge": "br-6e483662690d",
+        "clab-mgmt-net-bridge": "br-f1bff1433e1c",
         "clab-node-group": "",
         "clab-node-kind": "linux",
         "clab-node-lab-dir": "/home/vagrant/myclabs/vxlan_frr/dc/clab-dc/s2",
@@ -380,13 +380,13 @@
       "a": {
         "node": "s1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:6e:40:9b",
+        "mac": "aa:c1:ab:9e:9e:3c",
         "peer": "z"
       },
       "z": {
         "node": "l1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:d5:2b:a5",
+        "mac": "aa:c1:ab:1d:83:60",
         "peer": "a"
       }
     },
@@ -394,13 +394,13 @@
       "a": {
         "node": "s1",
         "interface": "eth2",
-        "mac": "aa:c1:ab:2c:6a:e8",
+        "mac": "aa:c1:ab:41:46:2e",
         "peer": "z"
       },
       "z": {
         "node": "l2",
         "interface": "eth1",
-        "mac": "aa:c1:ab:16:9d:c8",
+        "mac": "aa:c1:ab:87:16:08",
         "peer": "a"
       }
     },
@@ -408,13 +408,13 @@
       "a": {
         "node": "s1",
         "interface": "eth3",
-        "mac": "aa:c1:ab:21:3d:0b",
+        "mac": "aa:c1:ab:17:8d:f7",
         "peer": "z"
       },
       "z": {
         "node": "l3",
         "interface": "eth1",
-        "mac": "aa:c1:ab:2c:0a:04",
+        "mac": "aa:c1:ab:c7:b3:64",
         "peer": "a"
       }
     },
@@ -422,13 +422,13 @@
       "a": {
         "node": "s2",
         "interface": "eth1",
-        "mac": "aa:c1:ab:56:c0:de",
+        "mac": "aa:c1:ab:3f:fe:6e",
         "peer": "z"
       },
       "z": {
         "node": "l1",
         "interface": "eth2",
-        "mac": "aa:c1:ab:3b:04:27",
+        "mac": "aa:c1:ab:85:06:9b",
         "peer": "a"
       }
     },
@@ -436,13 +436,13 @@
       "a": {
         "node": "s2",
         "interface": "eth2",
-        "mac": "aa:c1:ab:e7:54:9a",
+        "mac": "aa:c1:ab:0e:2e:aa",
         "peer": "z"
       },
       "z": {
         "node": "l2",
         "interface": "eth2",
-        "mac": "aa:c1:ab:79:81:32",
+        "mac": "aa:c1:ab:ab:cf:74",
         "peer": "a"
       }
     },
@@ -450,13 +450,13 @@
       "a": {
         "node": "s2",
         "interface": "eth3",
-        "mac": "aa:c1:ab:4f:3e:6f",
+        "mac": "aa:c1:ab:21:6e:0b",
         "peer": "z"
       },
       "z": {
         "node": "l3",
         "interface": "eth2",
-        "mac": "aa:c1:ab:18:9b:39",
+        "mac": "aa:c1:ab:15:c1:25",
         "peer": "a"
       }
     },
@@ -464,13 +464,13 @@
       "a": {
         "node": "l1",
         "interface": "eth3",
-        "mac": "aa:c1:ab:fa:73:bb",
+        "mac": "aa:c1:ab:26:dc:cb",
         "peer": "z"
       },
       "z": {
         "node": "host1",
         "interface": "eth1",
-        "mac": "aa:c1:ab:7a:d9:59",
+        "mac": "aa:c1:ab:3d:a0:b2",
         "peer": "a"
       }
     },
@@ -478,13 +478,13 @@
       "a": {
         "node": "l2",
         "interface": "eth3",
-        "mac": "aa:c1:ab:ed:cb:2a",
+        "mac": "aa:c1:ab:b0:99:44",
         "peer": "z"
       },
       "z": {
         "node": "host2",
         "interface": "eth1",
-        "mac": "aa:c1:ab:57:be:c5",
+        "mac": "aa:c1:ab:87:bd:c4",
         "peer": "a"
       }
     },
@@ -492,13 +492,13 @@
       "a": {
         "node": "l2",
         "interface": "eth4",
-        "mac": "aa:c1:ab:08:3b:ef",
+        "mac": "aa:c1:ab:c5:d6:f6",
         "peer": "z"
       },
       "z": {
         "node": "host3",
         "interface": "eth1",
-        "mac": "aa:c1:ab:03:f4:04",
+        "mac": "aa:c1:ab:bc:f6:3b",
         "peer": "a"
       }
     },
@@ -506,13 +506,13 @@
       "a": {
         "node": "l3",
         "interface": "eth3",
-        "mac": "aa:c1:ab:e5:74:f1",
+        "mac": "aa:c1:ab:b0:cb:1d",
         "peer": "z"
       },
       "z": {
         "node": "host4",
         "interface": "eth1",
-        "mac": "aa:c1:ab:81:38:3f",
+        "mac": "aa:c1:ab:23:e2:2b",
         "peer": "a"
       }
     }

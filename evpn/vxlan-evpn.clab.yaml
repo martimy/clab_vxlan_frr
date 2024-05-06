@@ -25,9 +25,11 @@ topology:
         - config/r3-frr.conf:/etc/frr/frr.conf
     host4:
       exec:
+        - ip link set dev eth1 address aa:bb:04:04:04:04
         - ip addr add 192.168.1.4/24 dev eth1
     host5:
       exec:
+        - ip link set dev eth1 address aa:bb:05:05:05:05
         - ip addr add 192.168.1.5/24 dev eth1
   links:
     - endpoints: ["r1:eth1", "r2:eth1"]

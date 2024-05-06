@@ -25,32 +25,30 @@ $ cd ptp
 
 For more information, read the lab the documentation.
 
-## Introduction to VxLAN
+## VxLAN
 
-Virtual eXtensible Local-Area Network (VxLAN) is a standard network virtualization technology defined by the Internet Engineering Task Force (IETF) in [RFC 7348](https://datatracker.ietf.org/doc/html/rfc7348). It carries Ethernet traffic over an existing IP network from, potentially, a large number of tenants while maintaining traffic separation.
+Virtual eXtensible Local-Area Network (VxLAN) is a standard network virtualization technology defined by the Internet Engineering Task Force (IETF) in [RFC 7348](https://datatracker.ietf.org/doc/html/rfc7348). VXLANs encapsulats Ethernet frames within UDP packets and transport them over IP networks, making the underlying network transport between the VXLAN Tunnel Endpoint (VTEP) devices.
 
-VXLANs are encapsulated within UDP packets. The physical layout and geographic distance between nodes in the underlying network are irrelevant as long as UDP datagrams are forwarded between VXLAN Tunnel Endpoint (VTEP) devices.
+VTEPs are responsible for encapsulating and decapsulating Ethernet frames into VXLAN packets. When two hosts exchange Ethernet frames within the same VXLAN segment but on a different physical network, the packet is encapsulated with a VXLAN header by the source VTEP. This header includes information such as the VXLAN Network Identifier (VNI) and the destination VTEP's IP address. When a VXLAN packet arrives at the destination VTEP, it is decapsulated to retrieve the original Ethernet frame, which is then forwarded to the destination VM.
 
-VXLANs expand the Layer 2 network address space significantly, from 4K to 16 million. Each VXLAN network identifier (VNI) uniquely identifies a Layer 2 subnet or segment, enabling communication between virtual machines within the same VNI without requiring routing, while communication across different VNIs requires a router.
-
-
-VTEPs are responsible for encapsulating and decapsulating Ethernet frames into VXLAN packets. When a VM sends a packet to another VM within the same VXLAN segment but on a different host, the packet is encapsulated with a VXLAN header by the source VTEP. This header includes information such as the VXLAN Network Identifier (VNI) and the destination VTEP's IP address. When a VXLAN packet arrives at the destination VTEP, it is decapsulated to reveal the original Ethernet frame, which is then forwarded to the destination VM.
-
-The following diagram describes the structure of VTEP in Linux:
-
-![VTEP](img/vtep.png)
+Similar to VLANs, each VXLAN network identifier (VNI) uniquely identifies a Layer 2 subnet or segment, enabling communication between virtual machines within the same VNI without requiring routing, while communication across different VNIs requires a router. Unlike VLANs, VXLANs expand the Layer 2 network address space significantly, from 4K to more than 16 million.
 
 ### VTEP Discovery
 
 VXLAN does not provide a control plane, and VTEP discovery and host information (IP and MAC addresses, VNIs, and gateway VTEP IP address) learning are implemented using several [strategies](https://vincent.bernat.ch/en/blog/2017-vxlan-linux), including:
 
-- BUM flooding and address learning
+- BUM (broadcast, unknown unicast, and multicast) flooding and address learning.
 - Static L2/L3 entries
 - Multicast
 - EVPN
 
 The latter strategy uses EVPN as the control plane. EVPN allows VTEPs to exchange BGP EVPN routes to implement automatic VTEP discovery and host information advertisement, preventing unnecessary traffic flooding.
 
+### FRRouting
+
+This labs use FRRouting (FRR) to deploy VxLAN in several scenarios where each scenario implement one of the VTEP discovery strategy list above. FRR is an open source Internet routing protocol suite based on Linux. In all of the lab scenarios, the FRR is used as VTEP responsible for encapsulating/decapsulating the VxLAN packets from connected hosts. The FRR relies on Linux implementation of the Linux bridge and VxLAN interfaces as shown in the figure below:
+
+![VTEP](img/vtep.png)
 
 ## Notes
 

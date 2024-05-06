@@ -1,0 +1,520 @@
+{
+  "name": "dc",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-6e483662690d",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "ipv6-subnet": "2001:172:20:20::/64",
+        "ipv6-gw": "2001:172:20:20::1",
+        "mtu": 1500,
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "host1": {
+      "index": "0",
+      "shortname": "host1",
+      "longname": "clab-dc-host1",
+      "fqdn": "host1.dc.io",
+      "group": "",
+      "labdir": "/home/vagrant/myclabs/vxlan_frr/dc/clab-dc/host1",
+      "kind": "linux",
+      "image": "wbitt/network-multitool:alpine-minimal",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.9",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::9",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-6e483662690d",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/vagrant/myclabs/vxlan_frr/dc/clab-dc/host1",
+        "clab-node-name": "host1",
+        "clab-node-type": "",
+        "clab-topo-file": "/home/vagrant/myclabs/vxlan_frr/dc/vxlan-dc.clab.yaml",
+        "containerlab": "dc"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 80,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 11443,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 1180,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 443,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "host2": {
+      "index": "1",
+      "shortname": "host2",
+      "longname": "clab-dc-host2",
+      "fqdn": "host2.dc.io",
+      "group": "",
+      "labdir": "/home/vagrant/myclabs/vxlan_frr/dc/clab-dc/host2",
+      "kind": "linux",
+      "image": "wbitt/network-multitool:alpine-minimal",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-6e483662690d",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/vagrant/myclabs/vxlan_frr/dc/clab-dc/host2",
+        "clab-node-name": "host2",
+        "clab-node-type": "",
+        "clab-topo-file": "/home/vagrant/myclabs/vxlan_frr/dc/vxlan-dc.clab.yaml",
+        "containerlab": "dc"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 11443,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 1180,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 443,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 80,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "host3": {
+      "index": "2",
+      "shortname": "host3",
+      "longname": "clab-dc-host3",
+      "fqdn": "host3.dc.io",
+      "group": "",
+      "labdir": "/home/vagrant/myclabs/vxlan_frr/dc/clab-dc/host3",
+      "kind": "linux",
+      "image": "wbitt/network-multitool:alpine-minimal",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.7",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::7",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-6e483662690d",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/vagrant/myclabs/vxlan_frr/dc/clab-dc/host3",
+        "clab-node-name": "host3",
+        "clab-node-type": "",
+        "clab-topo-file": "/home/vagrant/myclabs/vxlan_frr/dc/vxlan-dc.clab.yaml",
+        "containerlab": "dc"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 1180,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 443,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 80,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 11443,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "host4": {
+      "index": "3",
+      "shortname": "host4",
+      "longname": "clab-dc-host4",
+      "fqdn": "host4.dc.io",
+      "group": "",
+      "labdir": "/home/vagrant/myclabs/vxlan_frr/dc/clab-dc/host4",
+      "kind": "linux",
+      "image": "wbitt/network-multitool:alpine-minimal",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.6",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::6",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-6e483662690d",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/vagrant/myclabs/vxlan_frr/dc/clab-dc/host4",
+        "clab-node-name": "host4",
+        "clab-node-type": "",
+        "clab-topo-file": "/home/vagrant/myclabs/vxlan_frr/dc/vxlan-dc.clab.yaml",
+        "containerlab": "dc"
+      },
+      "port-bindings": [
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 11443,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 1180,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 443,
+          "protocol": "tcp"
+        },
+        {
+          "host-ip": "",
+          "host-port": 0,
+          "port": 80,
+          "protocol": "tcp"
+        }
+      ]
+    },
+    "l1": {
+      "index": "4",
+      "shortname": "l1",
+      "longname": "clab-dc-l1",
+      "fqdn": "l1.dc.io",
+      "group": "",
+      "labdir": "/home/vagrant/myclabs/vxlan_frr/dc/clab-dc/l1",
+      "kind": "linux",
+      "image": "quay.io/frrouting/frr:9.1.0",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.5",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::5",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-6e483662690d",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/vagrant/myclabs/vxlan_frr/dc/clab-dc/l1",
+        "clab-node-name": "l1",
+        "clab-node-type": "",
+        "clab-topo-file": "/home/vagrant/myclabs/vxlan_frr/dc/vxlan-dc.clab.yaml",
+        "containerlab": "dc"
+      },
+      "port-bindings": [
+      ]
+    },
+    "l2": {
+      "index": "5",
+      "shortname": "l2",
+      "longname": "clab-dc-l2",
+      "fqdn": "l2.dc.io",
+      "group": "",
+      "labdir": "/home/vagrant/myclabs/vxlan_frr/dc/clab-dc/l2",
+      "kind": "linux",
+      "image": "quay.io/frrouting/frr:9.1.0",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.8",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::8",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-6e483662690d",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/vagrant/myclabs/vxlan_frr/dc/clab-dc/l2",
+        "clab-node-name": "l2",
+        "clab-node-type": "",
+        "clab-topo-file": "/home/vagrant/myclabs/vxlan_frr/dc/vxlan-dc.clab.yaml",
+        "containerlab": "dc"
+      },
+      "port-bindings": [
+      ]
+    },
+    "l3": {
+      "index": "6",
+      "shortname": "l3",
+      "longname": "clab-dc-l3",
+      "fqdn": "l3.dc.io",
+      "group": "",
+      "labdir": "/home/vagrant/myclabs/vxlan_frr/dc/clab-dc/l3",
+      "kind": "linux",
+      "image": "quay.io/frrouting/frr:9.1.0",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::4",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-6e483662690d",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/vagrant/myclabs/vxlan_frr/dc/clab-dc/l3",
+        "clab-node-name": "l3",
+        "clab-node-type": "",
+        "clab-topo-file": "/home/vagrant/myclabs/vxlan_frr/dc/vxlan-dc.clab.yaml",
+        "containerlab": "dc"
+      },
+      "port-bindings": [
+      ]
+    },
+    "s1": {
+      "index": "7",
+      "shortname": "s1",
+      "longname": "clab-dc-s1",
+      "fqdn": "s1.dc.io",
+      "group": "",
+      "labdir": "/home/vagrant/myclabs/vxlan_frr/dc/clab-dc/s1",
+      "kind": "linux",
+      "image": "quay.io/frrouting/frr:9.1.0",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::2",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-6e483662690d",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/vagrant/myclabs/vxlan_frr/dc/clab-dc/s1",
+        "clab-node-name": "s1",
+        "clab-node-type": "",
+        "clab-topo-file": "/home/vagrant/myclabs/vxlan_frr/dc/vxlan-dc.clab.yaml",
+        "containerlab": "dc"
+      },
+      "port-bindings": [
+      ]
+    },
+    "s2": {
+      "index": "8",
+      "shortname": "s2",
+      "longname": "clab-dc-s2",
+      "fqdn": "s2.dc.io",
+      "group": "",
+      "labdir": "/home/vagrant/myclabs/vxlan_frr/dc/clab-dc/s2",
+      "kind": "linux",
+      "image": "quay.io/frrouting/frr:9.1.0",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.10",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::a",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-6e483662690d",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/vagrant/myclabs/vxlan_frr/dc/clab-dc/s2",
+        "clab-node-name": "s2",
+        "clab-node-type": "",
+        "clab-topo-file": "/home/vagrant/myclabs/vxlan_frr/dc/vxlan-dc.clab.yaml",
+        "containerlab": "dc"
+      },
+      "port-bindings": [
+      ]
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "s1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:6e:40:9b",
+        "peer": "z"
+      },
+      "z": {
+        "node": "l1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:d5:2b:a5",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "s1",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:2c:6a:e8",
+        "peer": "z"
+      },
+      "z": {
+        "node": "l2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:16:9d:c8",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "s1",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:21:3d:0b",
+        "peer": "z"
+      },
+      "z": {
+        "node": "l3",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:2c:0a:04",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "s2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:56:c0:de",
+        "peer": "z"
+      },
+      "z": {
+        "node": "l1",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:3b:04:27",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "s2",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:e7:54:9a",
+        "peer": "z"
+      },
+      "z": {
+        "node": "l2",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:79:81:32",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "s2",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:4f:3e:6f",
+        "peer": "z"
+      },
+      "z": {
+        "node": "l3",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:18:9b:39",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "l1",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:fa:73:bb",
+        "peer": "z"
+      },
+      "z": {
+        "node": "host1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:7a:d9:59",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "l2",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:ed:cb:2a",
+        "peer": "z"
+      },
+      "z": {
+        "node": "host2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:57:be:c5",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "l2",
+        "interface": "eth4",
+        "mac": "aa:c1:ab:08:3b:ef",
+        "peer": "z"
+      },
+      "z": {
+        "node": "host3",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:03:f4:04",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "l3",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:e5:74:f1",
+        "peer": "z"
+      },
+      "z": {
+        "node": "host4",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:81:38:3f",
+        "peer": "a"
+      }
+    }
+  ]
+}

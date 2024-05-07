@@ -27,30 +27,30 @@ For more information, read the lab the documentation.
 
 ## VxLAN
 
-Virtual eXtensible Local-Area Network (VxLAN) is a standard network virtualization technology defined by the Internet Engineering Task Force (IETF) in [RFC 7348](https://datatracker.ietf.org/doc/html/rfc7348). VXLANs encapsulats Ethernet frames within UDP packets and transport them over IP networks, making the underlying network transport between the VXLAN Tunnel Endpoint (VTEP) devices.
+Virtual eXtensible Local-Area Network (VxLAN) is a standard network virtualization technology defined by the Internet Engineering Task Force (IETF) in [RFC 7348](https://datatracker.ietf.org/doc/html/rfc7348). VXLANs encapsulates Ethernet frames within UDP packets and transport them over IP networks, making the underlying network transport between the VXLAN Tunnel Endpoint (VTEP) devices.
 
-VTEPs are responsible for encapsulating and decapsulating Ethernet frames into VXLAN packets. When two hosts exchange Ethernet frames within the same VXLAN segment but on a different physical network, the packet is encapsulated with a VXLAN header by the source VTEP. This header includes information such as the VXLAN Network Identifier (VNI) and the destination VTEP's IP address. When a VXLAN packet arrives at the destination VTEP, it is decapsulated to retrieve the original Ethernet frame, which is then forwarded to the destination VM.
+VTEPs are responsible for encapsulating and encapsulating Ethernet frames into VXLAN packets. When two hosts exchange Ethernet frames within the same VXLAN segment but on a different physical network, the packet is encapsulated with a VXLAN header by the source VTEP. This header includes information such as the VXLAN Network Identifier (VNI) and the destination VTEP's IP address. When a VXLAN packet arrives at the destination VTEP, it is decapsulated to retrieve the original Ethernet frame, which is then forwarded to the destination VM.
 
 Similar to VLANs, each VXLAN network identifier (VNI) uniquely identifies a Layer 2 subnet or segment, enabling communication between virtual machines within the same VNI without requiring routing, while communication across different VNIs requires a router. Unlike VLANs, VXLANs expand the Layer 2 network address space significantly, from 4K to more than 16 million.
 
+
 ### VTEP Discovery
 
-VXLAN does not provide a control plane, and VTEP discovery and host information (IP and MAC addresses, VNIs, and gateway VTEP IP address) learning are implemented using several [strategies](https://vincent.bernat.ch/en/blog/2017-vxlan-linux), including:
+VxLAN is essentially a tunnelling scheme. However, unlike other tunnels, a VXLAN builds a 1 to N network, not just point to point. VXLAN does not provide a control plane, and VTEP discovery and address learning is performed either dynamically in a manner similar to a learning bridge, or using statically-configured forwarding entries. The VTEP discovery [strategies](https://vincent.bernat.ch/en/blog/2017-vxlan-linux), include:
 
 - BUM (broadcast, unknown unicast, and multicast) flooding and address learning.
 - Static L2/L3 entries
 - Multicast
 - EVPN
 
-The latter strategy uses EVPN as the control plane. EVPN allows VTEPs to exchange BGP EVPN routes to implement automatic VTEP discovery and host information advertisement, preventing unnecessary traffic flooding.
 
 ### FRRouting
 
-This labs use FRRouting (FRR) to deploy VxLAN in several scenarios where each scenario implement one of the VTEP discovery strategy list above. FRR is an open source Internet routing protocol suite based on Linux. In all of the lab scenarios, the FRR is used as VTEP responsible for encapsulating/decapsulating the VxLAN packets from connected hosts. The FRR relies on Linux implementation of the Linux bridge and VxLAN interfaces as shown in the figure below:
+This labs use FRRouting (FRR) to deploy VxLAN in several scenarios where each scenario implement one of the VTEP discovery strategy list above. FRR is an open source Internet routing protocol suite based on Linux. In all of the lab scenarios, the FRR is used as VTEP responsible for encapsulating/encapsulating the VxLAN packets from connected hosts. The FRR relies on Linux implementation of the Linux bridge and VxLAN interfaces as shown in the figure below:
 
 ![VTEP](img/vtep.png)
 
 ## Notes
 
-- This lab uses Dokcer image: quay.io/frrouting/frr:9.1.0
+- This lab uses Docker image: quay.io/frrouting/frr:9.1.0
   - FRR version: 9.1.0 running on Alpine Linux with Linux kernel 5.4.0-91-generic x86_64

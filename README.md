@@ -8,6 +8,14 @@ This repository includes multiple lab setups that illustrate several VxLAN deplo
 - VxLAN over hub-and-spoke using BGP-EVPN
 - VxLAN over a spine-leaf topology using BGP-EVPN
 
+
+Note: These labs have been created using the following:
+
+- Containerlab version: 0.54.2
+- Docker version: 26.1.1
+- FRRouting Docker image: quay.io/frrouting/frr:9.1.0 (FRR version: 9.1.0 running on Alpine Linux with Linux kernel 5.4.0-91-generic x86_64)
+- Linux image (for hosts): wbitt/network-multitool:alpine-minimal or wbitt/network-multitool:alpine-extra
+  
 ## Usage
 
 Clone this repository:
@@ -50,7 +58,12 @@ This labs use FRRouting (FRR) to deploy VxLAN in several scenarios where each sc
 
 ![VTEP](img/vtep.png)
 
-## Notes
 
-- This lab uses Docker image: quay.io/frrouting/frr:9.1.0
-  - FRR version: 9.1.0 running on Alpine Linux with Linux kernel 5.4.0-91-generic x86_64
+FRR does not manage network interfaces directly. Instead it learns about the interface configuration from the Linux kernel. Therefore, the configuration of the bridge and the VxLAN interfaces shown in the figure must be handled by Linux.
+
+## Usefull Links
+
+- [FRRouting documentation](https://docs.frrouting.org/en/latest/index.html)
+- [Linux ip command manual](https://man7.org/linux/man-pages/man8/ip.8.html)
+- [Linux brctl command manual](https://man7.org/linux/man-pages/man8/brctl.8.html)
+

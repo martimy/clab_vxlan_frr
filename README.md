@@ -66,4 +66,5 @@ FRR does not manage network interfaces directly. Instead it learns about the int
 - [FRRouting documentation](https://docs.frrouting.org/en/latest/index.html)
 - [Linux ip command manual](https://man7.org/linux/man-pages/man8/ip.8.html)
 - [Linux brctl command manual](https://man7.org/linux/man-pages/man8/brctl.8.html)
+- [Containerlab](https://containerlab.dev/)
 

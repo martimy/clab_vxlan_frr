@@ -71,7 +71,16 @@ $ sudo clab destroy [-t vxlan-ptp.clab.yaml]
 You should be able to ping from one host to the other:
 
 ```
-$ docker exec -it clab-ptp-host4 ping 192.168.1.5
+$ docker exec clab-ptp-host4 ping 192.168.1.5
+```
+
+```
+PING 192.168.1.5 (192.168.1.5) 56(84) bytes of data.
+64 bytes from 192.168.1.5: icmp_seq=1 ttl=64 time=0.092 ms
+64 bytes from 192.168.1.5: icmp_seq=2 ttl=64 time=0.095 ms
+64 bytes from 192.168.1.5: icmp_seq=3 ttl=64 time=0.259 ms
+64 bytes from 192.168.1.5: icmp_seq=4 ttl=64 time=0.220 ms
+...
 ```
 
 To check the bridge forwarding database:
@@ -82,9 +91,62 @@ $ docker exec clab-ptp-r1 bridge fdb show dev vxlan100 | grep dst
 
 ```
 00:00:00:00:00:00 dst 10.0.0.2 self permanent
-2e:3b:77:13:85:45 dst 10.0.0.2 self
-aa:c1:ab:53:dc:83 dst 10.0.0.2 self
+2e:0d:9e:33:92:67 dst 10.0.0.2 self 
+aa:bb:05:05:05:05 dst 10.0.0.2 self 
 ```
+
+Check the VxLAN interface on teh routers:
+
+```
+$ docker exec clab-ptp-r1 vtysh -c "show int vxlan100"
+```
+
+```
+Interface vxlan100 is up, line protocol is up
+  Link ups:       1    last: 2024/05/07 14:44:37.01
+  Link downs:     2    last: 2024/05/07 14:44:36.85
+  vrf: default
+  index 2 metric 0 mtu 1500 speed 4294967295 txqlen 1000
+  flags: <UP,BROADCAST,RUNNING,MULTICAST>
+  Type: Ethernet
+  HWaddr: ee:9d:38:5f:35:14
+  inet6 fe80::ec9d:38ff:fe5f:3514/64
+  Interface Type Vxlan
+  Interface Slave Type Bridge
+ VTEP IP: 10.0.0.1  VxLAN Id 100 Access VLAN Id 1
+  Mcast Group 10.0.0.2
+  Master interface: br100
+  protodown: off 
+```
+
+While running ping, use Tshark in another terminal to capture VxLAN packets (make sure Tshark is installed on your host machine):
+
+```
+$ sudo ip netns exec clab-ptp-r1 tshark -i eth1 -O vxlan
+```
+
+Notice the encapsulated ICMP packet inside the outer UDP packet.
+
+```
+Frame 53: 148 bytes on wire (1184 bits), 148 bytes captured (1184 bits) on interface eth1, id 0
+Ethernet II, Src: aa:c1:ab:48:fe:ba (aa:c1:ab:48:fe:ba), Dst: aa:c1:ab:15:7c:25 (aa:c1:ab:15:7c:25)
+Internet Protocol Version 4, Src: 10.0.0.1, Dst: 10.0.0.2
+User Datagram Protocol, Src Port: 36705, Dst Port: 4789
+Virtual eXtensible Local Area Network
+    Flags: 0x0800, VXLAN Network ID (VNI)
+        0... .... .... .... = GBP Extension: Not defined
+        .... 1... .... .... = VXLAN Network ID (VNI): True
+        .... .... .0.. .... = Don't Learn: False
+        .... .... .... 0... = Policy Applied: False
+        .000 .000 0.00 .000 = Reserved(R): 0x0000
+    Group Policy ID: 0
+    VXLAN Network Identifier (VNI): 100
+    Reserved: 0
+Ethernet II, Src: aa:bb:04:04:04:04 (aa:bb:04:04:04:04), Dst: aa:bb:05:05:05:05 (aa:bb:05:05:05:05)
+Internet Protocol Version 4, Src: 192.168.1.4, Dst: 192.168.1.5
+Internet Control Message Protocol
+```
+
 
 ## Suggestions
 

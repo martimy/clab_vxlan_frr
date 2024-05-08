@@ -7,7 +7,7 @@ This lab demonstrates the use of VxLAN to link three hosts across a layer 3 netw
 
 ## Configuration overview:
 
-The network topology is specified in the containerlab file vxlan-pim.clab.yaml. The file specifies the images needed for each node as well as any configuration files and startup commands. 
+The network topology is specified in the containerlab file vxlan-pim.clab.yaml. The file specifies the images needed for each node as well as any configuration files and startup commands.
 
 To enable OSPF and PIM on the routers, the daemons file used by FRR must include the following lines:
 
@@ -66,10 +66,10 @@ $ docker exec clab-ptp-r1 bridge fdb show dev vxlan100 | grep dst
 
 ```
 00:00:00:00:00:00 dst 239.1.1.1 via eth1 self permanent
-aa:c1:ab:11:6a:e1 dst 1.1.1.3 self 
-aa:bb:06:06:06:06 dst 1.1.1.3 self 
-f6:36:7d:0f:82:8d dst 1.1.1.3 self 
-aa:bb:05:05:05:05 dst 1.1.1.2 self 
+aa:c1:ab:11:6a:e1 dst 1.1.1.3 self
+aa:bb:06:06:06:06 dst 1.1.1.3 self
+f6:36:7d:0f:82:8d dst 1.1.1.3 self
+aa:bb:05:05:05:05 dst 1.1.1.2 self
 ```
 
 Here are some PIM and IGMP verification commands:
@@ -123,3 +123,60 @@ To flush the bridge entries:
 $ docker exec clab-pim-r1 bridge fdb flush dev br100
 ```
 
+To capture PIM messages:
+
+```
+$ sudo ip netns exec clab-pim-r2 tshark -i eth1 -O pim
+```
+
+```
+Frame 25: 68 bytes on wire (544 bits), 68 bytes captured (544 bits) on interface eth1, id 0
+Ethernet II, Src: aa:c1:ab:cf:66:77 (aa:c1:ab:cf:66:77), Dst: IPv4mcast_0d (01:00:5e:00:00:0d)
+Internet Protocol Version 4, Src: 10.0.2.4, Dst: 224.0.0.13
+Protocol Independent Multicast
+    0010 .... = Version: 2
+    .... 0011 = Type: Join/Prune (3)
+    Reserved byte(s): 00
+    Checksum: 0xd6e3 [correct]
+    [Checksum Status: Good]
+    PIM Options
+        Upstream-neighbor: 10.0.2.2
+        Reserved byte(s): 00
+        Num Groups: 1
+        Holdtime: 210
+        Group 0: 239.1.1.1/32
+            Num Joins: 1
+                IP address: 1.1.1.2/32 (S)
+            Num Prunes: 0
+```
+
+To capture IGMP messages:
+
+```
+$ sudo ip netns exec clab-pim-r2 tshark -i eth1 -O igmp
+```
+
+```
+Frame 49: 94 bytes on wire (752 bits), 94 bytes captured (752 bits) on interface eth1, id 0
+Ethernet II, Src: aa:c1:ab:9b:e8:7c (aa:c1:ab:9b:e8:7c), Dst: IPv4mcast_16 (01:00:5e:00:00:16)
+Internet Protocol Version 4, Src: 10.0.2.2, Dst: 224.0.0.22
+Internet Group Management Protocol
+    [IGMP Version: 3]
+    Type: Membership Report (0x22)
+    Reserved: 00
+    Checksum: 0x81c2 [correct]
+    [Checksum Status: Good]
+    Reserved: 0000
+    Num Group Records: 6
+    Group Record : 224.0.0.6  Mode Is Exclude
+        Record Type: Mode Is Exclude (2)
+        Aux Data Len: 0
+        Num Src: 0
+        Multicast Address: 224.0.0.6
+    Group Record : 239.1.1.1  Mode Is Exclude
+        Record Type: Mode Is Exclude (2)
+        Aux Data Len: 0
+        Num Src: 0
+        Multicast Address: 239.1.1.1
+...
+```

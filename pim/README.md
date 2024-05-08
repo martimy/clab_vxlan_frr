@@ -9,10 +9,16 @@ This lab demonstrates the use of VxLAN to link three hosts across a layer 3 netw
 
 The network topology is specified in the containerlab file vxlan-pim.clab.yaml. The file specifies the images needed for each node as well as any configuration files and startup commands. 
 
+To enable OSPF and PIM on the routers, the daemons file used by FRR must include the following lines:
+
+```
+ospfd=yes
+pimd=yes
+```
+
 The router configuration files are in the *-frr.conf files. The files include the interface and OSPF configurations for each router. All router-facing interfaces belong to OSPF area 0. The OSPF distributes routes to all connected networks, including the loopback interfaces, which are used by the VxLAN.
 
 Note that PIM must be enabled on all interfaces facing multicast sources or multicast receivers, as well as on the interface where the RP address is configured. IGMP is also enabled on the same interafces.
-
 
 The VxLAN configuration reside in the setup-vxlan.sh script files. The configuration is mostly similar to other labs with the excption of the following command, which specifies the multicast group address and the physical interface used as the endpoint for the VXLAN tunnel. The TTL must be increased the default 1 to allow VxLAN packets to traverse the network.
 

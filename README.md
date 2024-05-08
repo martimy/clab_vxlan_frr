@@ -15,7 +15,7 @@ Note: These labs have been created using the following:
 - Docker version: 26.1.1
 - FRRouting Docker image: quay.io/frrouting/frr:9.1.0 (FRR version: 9.1.0 running on Alpine Linux with Linux kernel 5.4.0-91-generic x86_64)
 - Linux image (for hosts): wbitt/network-multitool:alpine-minimal or wbitt/network-multitool:alpine-extra
-  
+
 ## Usage
 
 Clone this repository:
@@ -59,7 +59,7 @@ This labs use FRRouting (FRR) to deploy VxLAN in several scenarios where each sc
 ![VTEP](img/vtep.png)
 
 
-FRR does not manage network interfaces directly. Instead it learns about the interface configuration from the Linux kernel. Therefore, the configuration of the bridge and the VxLAN interfaces shown in the figure must be handled by Linux.
+FRR does not manage network interfaces directly. Instead it learns about the interface configuration from the Linux kernel. Therefore, the configuration of the bridge and the VxLAN interface shown in the figure must be handled by Linux.
 
 ## Usefull Links
 
@@ -67,4 +67,3 @@ FRR does not manage network interfaces directly. Instead it learns about the int
 - [Linux ip command manual](https://man7.org/linux/man-pages/man8/ip.8.html)
 - [Linux brctl command manual](https://man7.org/linux/man-pages/man8/brctl.8.html)
 - [Containerlab](https://containerlab.dev/)
-

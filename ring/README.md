@@ -16,6 +16,12 @@ VTEP discovery is done using three strategies:
 
 The network topology is specified in the containerlab file `vxlan-ring.clab.yaml`. The file specifies the images needed for each node as well as any configuration files and startup commands. Consult the [containerlab documentation](https://containerlab.dev/manual/topo-def-file/) for more information about the topology.
 
+To enable OSPF on the routers, the daemons file used by FRR must include the following line:
+
+```
+ospfd=yes
+```
+
 The router configuration files are in the *-frr.conf files. The files include the interface and OSPF configurations for each router. All router-facing interfaces belong to OSPF area 0. The OSPF distributes routes to all connected networks, including the loop-back interfaces, which are used by the VxLAN.
 
 The VxLAN configuration reside in the `setup-vxlan-*.sh` script files. Each file executes a slightly different set of commands to configure a Linux bridge and a VxLAN interface in each router, depending on the VTEP discovery strategy.

@@ -44,9 +44,9 @@ Similar to VLANs, each VXLAN network identifier (VNI) uniquely identifies a Laye
 
 ### VTEP Discovery
 
-VxLAN is essentially a tunnelling scheme. However, unlike other tunnels, a VXLAN builds a 1 to N network, not just point to point. VXLAN does not provide a control plane, and VTEP discovery and address learning is performed either dynamically in a manner similar to a learning bridge, or using statically-configured forwarding entries. The VTEP discovery [strategies](https://vincent.bernat.ch/en/blog/2017-vxlan-linux), include:
+VxLAN is essentially a tunnelling scheme. Unlike other tunnels, a VXLAN builds a 1 to N network, not just point to point. VXLAN does not provide a control plane and VTEP discovery and address learning is performed either dynamically, in a manner similar to a learning bridge, or using statically-configured forwarding entries. The VTEP discovery [strategies](https://vincent.bernat.ch/en/blog/2017-vxlan-linux) include:
 
-- BUM (broadcast, unknown unicast, and multicast) flooding and address learning.
+- BUM (broadcast, unknown unicast, and multicast) flooding and address learning
 - Static L2/L3 entries
 - Multicast
 - EVPN
@@ -54,7 +54,7 @@ VxLAN is essentially a tunnelling scheme. However, unlike other tunnels, a VXLAN
 
 ### FRRouting
 
-This labs use FRRouting (FRR) to deploy VxLAN in several scenarios where each scenario implement one of the VTEP discovery strategy list above. FRR is an open source Internet routing protocol suite based on Linux. In all of the lab scenarios, the FRR is used as VTEP responsible for encapsulating/encapsulating the VxLAN packets from connected hosts. The FRR relies on Linux implementation of the Linux bridge and VxLAN interfaces as shown in the figure below:
+These labs use FRRouting (FRR) to deploy VxLAN in several scenarios where each scenario implements one of the VTEP discovery strategies listed above. FRR is an open source routing protocol suite based on Linux. In all of the labs, the FRR is used as a VTEP responsible for encapsulating/encapsulating the VxLAN packets from connected hosts. The FRR relies on Linux implementation of the Linux bridge and the VxLAN interface as shown in the figure below:
 
 ![VTEP](img/vtep.png)
 

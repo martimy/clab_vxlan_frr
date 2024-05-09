@@ -23,6 +23,11 @@ topology:
       binds:
         - config/daemons:/etc/frr/daemons
         - config/r3-frr.conf:/etc/frr/frr.conf
+    r4:
+      image: quay.io/frrouting/frr:9.1.0
+      binds:
+        - config/daemons:/etc/frr/daemons
+        - config/r4-frr.conf:/etc/frr/frr.conf
     host4:
       exec:
         - ip link set dev eth1 address aa:bb:04:04:04:04
@@ -31,8 +36,14 @@ topology:
       exec:
         - ip link set dev eth1 address aa:bb:05:05:05:05
         - ip addr add 192.168.1.5/24 dev eth1
+    host6:
+      exec:
+        - ip link set dev eth1 address aa:bb:06:06:06:06
+        - ip addr add 192.168.1.6/24 dev eth1
   links:
-    - endpoints: ["r1:eth1", "r2:eth1"]
-    - endpoints: ["r3:eth1", "r2:eth2"]
+    - endpoints: ["r1:eth1", "r4:eth1"]
+    - endpoints: ["r2:eth1", "r4:eth2"]
+    - endpoints: ["r3:eth1", "r4:eth3"]
     - endpoints: ["host4:eth1", "r1:eth2"]
-    - endpoints: ["host5:eth1", "r3:eth2"]
+    - endpoints: ["host5:eth1", "r2:eth2"]
+    - endpoints: ["host6:eth1", "r3:eth2"]

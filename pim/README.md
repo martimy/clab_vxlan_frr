@@ -1,8 +1,8 @@
 # VxLAN with Multicast
 
-This lab demonstrates the use of VxLAN to link three hosts across a layer 3 network. The network consists of four routers. Three of the routers are connected to a single host each and acts as VxLAN VTEPs. The three routers are connected to a fourth router forming star topology. The routers rely on OSPF for routing. PIM and IGMP are used for VTEP discovery.  
+This lab demonstrates the use of VxLAN to link three hosts across a layer 3 network. The network consists of four routers. Three of the routers are connected to a single host each and acts as VxLAN VTEPs. The three routers are connected to a fourth router forming a hub-spoke topology. The routers rely on OSPF for routing. PIM and IGMP are used for VTEP discovery.  
 
-![p2p](../img/pim.png)
+![p2p](../img/hubspoke.png)
 
 
 ## Configuration overview:

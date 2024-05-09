@@ -4,8 +4,8 @@ This repository includes multiple lab setups that illustrate several VxLAN deplo
 
 - VxLAN over point-to-point connection
 - VxLAN over a ring topology using several VTEP discovery methods
-- VxLAN over a start topology with multicast
-- VxLAN over hub-and-spoke using BGP-EVPN
+- VxLAN over a hub-and-spoke topology using multicast
+- VxLAN over a hub-and-spoke topology using BGP-EVPN
 - VxLAN over a spine-leaf topology using BGP-EVPN
 
 

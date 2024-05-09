@@ -1,6 +1,6 @@
 # VxLAN over BGP EVPN
 
-This lab demonstrates the use of VxLAN to create an Ethernet tunnel connecting three LAN segments across a layer 3 network using BGP EVPN technology. The network consists of four routers, three of the routers are VTEPs connecting to one server each. The fourth router acts as a route reflector for BGP routes.
+This lab demonstrates the use of VxLAN to create an Ethernet tunnel connecting three LAN segments across a layer 3 network using BGP EVPN (Ethernet VPN) echnology. The network consists of four routers, three of the routers are VTEPs connecting to one server each. The fourth router acts as a route reflector for BGP routes.
 
 To implement Layer 2 communication between hosts across the L3 network, the source and remote VTEPs must learn the MAC addresses of the hosts. The VTEPs function as BGP EVPN peers to exchange MAC/IP routes so that they can obtain the host MAC addresses.
 
@@ -14,6 +14,23 @@ The VPN address family is a special multiprotocol BGP address family that has be
 
 EVPN NLRI defines several types of BGP EVPN routes, which can carry information for VxLANs such as the host IP address, MAC address, VNI, and VRF. After a VTEP learns the IP address and MAC address of a connected host, the VTEP can send the information to other VTEPs through MP-BGP routes. Therefore, learning of host IP address and MAC address information can be implemented on the control plane, negating the need for flooding on the data plane.
 
+## Configuration overview:
+
+The network topology is specified in the containerlab file vxlan-evpn.clab.yaml. The file specifies the images needed for each node as well as any configuration files and startup commands.
+
+To enable BGP on the routers, the daemons file used by FRR must include the following line:
+
+```
+bgpd=yes
+```
+
+The router configuration files are in the *-frr.conf files. The files include the interface and BGP configurations for each router. Instead of establishing pairwise BGP peering among all routers, the VTEP routers establish BGP peering with a route reflector, r4. The BGP configuration is almost identical in all routers (the route reflector is slightly different) and it includes two address families. The IPv4 unicast family distributes the routes to all connected networks, including the loopback interfaces. The L2VPN EVPN address family distributes information about all learned VNIs (VxLAN Network Identifier).
+
+The VxLAN configuration reside in the setup-vxlan.sh script file. The configuration is mostly similar to other labs with the exception of the following command, which specifies the multicast group address and the physical interface used as the endpoint for the VXLAN tunnel. Note that dynamic address learning is disabled so that populating the bridge entries is be done by BGP.
+
+```
+docker exec -it clab-evpn-r1 ip link add vxlan100 type vxlan id 100 dstport 4789 local 1.1.1.1 nolearning
+```
 
 ## Starting and ending the lab
 

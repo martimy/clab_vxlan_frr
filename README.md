@@ -44,7 +44,7 @@ Similar to VLANs, each VXLAN network identifier (VNI) uniquely identifies a Laye
 
 ### VTEP Discovery
 
-VxLAN is essentially a tunnelling scheme. Unlike other tunnels, a VXLAN builds a 1 to N network, not just point to point. VXLAN does not provide a control plane and VTEP discovery and address learning is performed either dynamically, in a manner similar to a learning bridge, or using statically-configured forwarding entries. The VTEP discovery [strategies](https://vincent.bernat.ch/en/blog/2017-vxlan-linux) include:
+VxLAN is essentially a tunnelling scheme but it is not limited to point to point tunnels. VXLAN does not provide a control plane to discover other VTEPs in the network, instead address learning is performed either dynamically, in a manner similar to a learning bridge, or using statically-configured forwarding entries. The VTEP discovery strategies include:
 
 - BUM (broadcast, unknown unicast, and multicast) flooding and address learning
 - Static L2/L3 entries
@@ -58,12 +58,13 @@ These labs use FRRouting (FRR) to deploy VxLAN in several scenarios where each s
 
 ![VTEP](img/vtep.png)
 
-
 FRR does not manage network interfaces directly. Instead it learns about the interface configuration from the Linux kernel. Therefore, the configuration of the bridge and the VxLAN interface shown in the figure must be handled by Linux.
 
-## Usefull Links
+## Useful Links
 
 - [FRRouting documentation](https://docs.frrouting.org/en/latest/index.html)
 - [Linux ip command manual](https://man7.org/linux/man-pages/man8/ip.8.html)
 - [Linux brctl command manual](https://man7.org/linux/man-pages/man8/brctl.8.html)
 - [Containerlab](https://containerlab.dev/)
+- [VxLAN & Linux](https://vincent.bernat.ch/en/blog/2017-vxlan-linux)
+- [VxLAN: BGP EVPN with FRR](https://vincent.bernat.ch/en/blog/2017-vxlan-bgp-evpn)

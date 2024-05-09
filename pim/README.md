@@ -18,9 +18,9 @@ pimd=yes
 
 The router configuration files are in the *-frr.conf files. The files include the interface and OSPF configurations for each router. All router-facing interfaces belong to OSPF area 0. The OSPF distributes routes to all connected networks, including the loopback interfaces, which are used by the VxLAN.
 
-Note that PIM must be enabled on all interfaces facing multicast sources or multicast receivers, as well as on the interface where the RP address is configured. IGMP is also enabled on the same interafces.
+Note that PIM must be enabled on all interfaces facing multicast sources or multicast receivers, as well as on the interface where the RP address is configured. IGMP is also enabled on the same interfaces.
 
-The VxLAN configuration reside in the setup-vxlan.sh script files. The configuration is mostly similar to other labs with the excption of the following command, which specifies the multicast group address and the physical interface used as the endpoint for the VXLAN tunnel. The TTL must be increased the default 1 to allow VxLAN packets to traverse the network.
+The VxLAN configuration reside in the setup-vxlan.sh script files. The configuration is mostly similar to other labs with the exception of the following command, which specifies the multicast group address and the physical interface used as the endpoint for the VXLAN tunnel. The TTL must be increased the default 1 to allow VxLAN packets to traverse the network.
 
 ```
 docker exec -it clab-pim-r1 ip link add vxlan100 type vxlan id 100 dstport 4789 local 1.1.1.1 group 239.1.1.1 dev eth1 ttl 5

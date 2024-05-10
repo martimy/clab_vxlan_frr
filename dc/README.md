@@ -49,6 +49,119 @@ sudo clab destroy [-t vxlan-dc.clab.yaml]
 
 ## Verification
 
-You should be able to ping from one host to any other host in the network. The hosts that reside on the same subnet will connect over VxLAN tunnel, while hosts residing in different subnet will connect over IP. You can verify the connectivity using ping and mtr.
+You should be able to ping from one host to any other host in the network. The hosts that reside on the same subnet will connect over VxLAN tunnel, while hosts residing in different subnet will connect over IP. You can verify the connectivity using ping, traceroute, or mtr.
 
- 
+
+```
+$ docker exec -it clab-dc-host1 mtr 192.168.2.3
+```
+
+```
+My traceroute  [v0.95]
+host1 (192.168.1.1) -> 192.168.2.3 (192.168.2.3)                                             2024-05-10T11:25:31+0000
+Keys:  Help   Display mode   Restart statistics   Order of fields   quit
+                             Packets               Pings
+Host                                                                      Loss%   Snt   Last   Avg  Best  Wrst StDev
+1. 192.168.1.100                                                           0.0%     7    0.2   0.1   0.1   0.2   0.1
+2. 1.1.1.12                                                                0.0%     7    0.2   0.2   0.1   0.3   0.1
+3. 1.1.1.23                                                                0.0%     7    0.1   0.1   0.1   0.2   0.0
+4. 192.168.2.3                                                             0.0%     7    0.2   0.2   0.2   0.4   0.1
+```
+
+Notice that the traffic to 192.168.2.3, which is connected to router l2, is directed first towards the gateway 192.168.2.100, which on router l3. The packet captured below shows VxLAN packet from l3 to l2 carrying the ICMP packet from 192.168.1.1 to 192.168.2.3.
+
+```
+$ sudo ip netns exec clab-dc-l3 tshark -i eth1 -O vxlan
+```
+
+```
+Frame 26: 128 bytes on wire (1024 bits), 128 bytes captured (1024 bits) on interface eth1, id 0
+Ethernet II, Src: aa:c1:ab:7b:8a:eb (aa:c1:ab:7b:8a:eb), Dst: aa:c1:ab:db:5d:d5 (aa:c1:ab:db:5d:d5)
+Internet Protocol Version 4, Src: 1.1.1.23, Dst: 1.1.1.22
+User Datagram Protocol, Src Port: 58080, Dst Port: 4789
+Virtual eXtensible Local Area Network
+    Flags: 0x0800, VXLAN Network ID (VNI)
+        0... .... .... .... = GBP Extension: Not defined
+        .... .... .0.. .... = Don't Learn: False
+        .... 1... .... .... = VXLAN Network ID (VNI): True
+        .... .... .... 0... = Policy Applied: False
+        .000 .000 0.00 .000 = Reserved(R): 0x0000
+    Group Policy ID: 0
+    VXLAN Network Identifier (VNI): 200
+    Reserved: 0
+Ethernet II, Src: aa:bb:cc:00:00:04 (aa:bb:cc:00:00:04), Dst: aa:bb:03:03:03:03 (aa:bb:03:03:03:03)
+Internet Protocol Version 4, Src: 192.168.1.1, Dst: 192.168.2.3
+Internet Control Message Protocol
+```
+
+Check BGP on the spine routers:
+
+```
+$ docker exec clab-dc-s1 vtysh -c "show bgp summary"
+```
+
+```
+IPv4 Unicast Summary (VRF default):
+BGP router identifier 1.1.1.11, local AS number 65000 vrf-id 0
+BGP table version 7
+RIB entries 13, using 1248 bytes of memory
+Peers 6, using 79 KiB of memory
+Peer groups 2, using 128 bytes of memory
+
+Neighbor        V         AS   MsgRcvd   MsgSent   TblVer  InQ OutQ  Up/Down State/PfxRcd   PfxSnt Desc
+*1.1.1.21       4        100        34        33        7    0    0 00:12:51            3        7 FRRouting/9.1_git
+*1.1.1.22       4        100        34        33        7    0    0 00:12:53            2        7 FRRouting/9.1_git
+*1.1.1.23       4        100        34        33        7    0    0 00:12:51            3        7 FRRouting/9.1_git
+eth1            4      65001        34        34        7    0    0 00:12:54            3        7 N/A
+eth2            4      65002        34        34        7    0    0 00:12:56            2        7 N/A
+eth3            4      65003        34        34        7    0    0 00:12:54            3        7 N/A
+
+Total number of neighbors 6
+* - dynamic neighbor
+3 dynamic neighbor(s), limit 100
+
+L2VPN EVPN Summary (VRF default):
+BGP router identifier 1.1.1.11, local AS number 65000 vrf-id 0
+BGP table version 0
+RIB entries 7, using 672 bytes of memory
+Peers 6, using 79 KiB of memory
+Peer groups 2, using 128 bytes of memory
+
+Neighbor        V         AS   MsgRcvd   MsgSent   TblVer  InQ OutQ  Up/Down State/PfxRcd   PfxSnt Desc
+*1.1.1.21       4        100        34        33        3    0    0 00:12:51            3       10 FRRouting/9.1_git
+*1.1.1.22       4        100        34        33        3    0    0 00:12:53            4       10 FRRouting/9.1_git
+*1.1.1.23       4        100        34        33        3    0    0 00:12:51            3       10 FRRouting/9.1_git
+eth1            4      65001        34        34        3    0    0 00:12:54            3       10 N/A
+eth2            4      65002        34        34        3    0    0 00:12:56            4       10 N/A
+eth3            4      65003        34        34        3    0    0 00:12:54            3       10 N/A
+
+Total number of neighbors 6
+* - dynamic neighbor
+3 dynamic neighbor(s), limit 100
+```
+
+Check BGP routes in each leaf router:
+
+```
+$ docker exec clab-dc-l1 vtysh -c "show ip route bgp"
+```
+
+```
+Codes: K - kernel route, C - connected, S - static, R - RIP,
+       O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,
+       T - Table, v - VNC, V - VNC-Direct, A - Babel, F - PBR,
+       f - OpenFabric,
+       > - selected route, * - FIB route, q - queued, r - rejected, b - backup
+       t - trapped, o - offload failure
+
+B>* 1.1.1.11/32 [20/0] via fe80::a8c1:abff:fece:49e6, eth1, weight 1, 00:02:53
+B>* 1.1.1.12/32 [20/0] via fe80::a8c1:abff:fe11:3380, eth2, weight 1, 00:14:29
+B>* 1.1.1.22/32 [20/0] via fe80::a8c1:abff:fe11:3380, eth2, weight 1, 00:02:53
+  *                    via fe80::a8c1:abff:fece:49e6, eth1, weight 1, 00:02:53
+B>* 1.1.1.23/32 [20/0] via fe80::a8c1:abff:fe11:3380, eth2, weight 1, 00:02:53
+  *                    via fe80::a8c1:abff:fece:49e6, eth1, weight 1, 00:02:53
+B>* 192.168.2.0/24 [20/0] via fe80::a8c1:abff:fe11:3380, eth2, weight 1, 00:02:53
+  *                       via fe80::a8c1:abff:fece:49e6, eth1, weight 1, 00:02:53
+```
+
+*Note: The FRR image used in this lab does not seem to support ECMP. FRR needs to be compiled with `--enable-multipath=X` where X is the desired max ecmp allowed.*

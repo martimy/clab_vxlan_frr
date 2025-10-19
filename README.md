@@ -68,3 +68,7 @@ FRR does not manage network interfaces directly. Instead it learns about the int
 - [Containerlab](https://containerlab.dev/)
 - [VxLAN & Linux](https://vincent.bernat.ch/en/blog/2017-vxlan-linux)
 - [VxLAN: BGP EVPN with FRR](https://vincent.bernat.ch/en/blog/2017-vxlan-bgp-evpn)
+
+## Author
+
+Created by Maen Artimy - [Personal Blog](http://adhocnode.com)
